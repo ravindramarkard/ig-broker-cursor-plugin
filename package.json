@@ -16,6 +16,8 @@
     "test:watch": "vitest",
     "validate": "node scripts/validate-plugin.mjs",
     "smoke": "node scripts/smoke.mjs",
+    "inspect": "node scripts/inspect.mjs",
+    "hook:simulate": "node scripts/simulate-hook.mjs",
     "check": "npm run typecheck && npm test && npm run build && npm run validate && npm run smoke",
     "install-local": "node scripts/install-local.mjs"
   },
@@ -24,6 +26,7 @@
     "zod": "^4.6.6"
   },
   "devDependencies": {
+    "@modelcontextprotocol/inspector": "^1.0.2",
     "@types/node": "^26.6.5",
     "esbuild": "^0.28.2",
     "tsx": "^4.23.15",

@@ -121,4 +121,5 @@ scripts/                     build, validate, smoke, install-local
 
 - Uses IG session auth (API v2 `CST` / `X-SECURITY-TOKEN`). IG's OAuth (v3) and the Lightstreamer streaming API are not implemented, so quotes are request/response snapshots.
 - `approxPnL` is points × size × contract size in the position currency, which is right for spread bets and most CFDs. IG's platform is authoritative.
+- The hook command (`node ./hooks/ig-trade-approval.mjs`) assumes Cursor runs plugin hooks from the plugin root, following Cursor's plugin examples. If a Cursor version resolves it differently, the hook fails closed, which blocks `ig_execute_trade` rather than letting it through.
 - IG limits non-trading requests (~30/min per account) and historical price data (~10,000 points/week). The tools ask for small windows by default.
