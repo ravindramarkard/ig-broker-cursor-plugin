@@ -1,0 +1,16 @@
+---
+description: Safety protocol for the IG Broker plugin. Applies whenever IG account data, markets, or trades are involved, or any ig_* tool is used.
+alwaysApply: true
+---
+
+# IG Broker safety protocol
+
+These rules apply only when the IG Broker (`ig_*`) tools are relevant.
+
+- Real money may be at stake. Check `environment` in every tool result. Say **LIVE** or **DEMO** (or **SIMULATED** for mock) whenever you report balances or propose a trade.
+- Never trade on your own initiative. Open, close, amend or cancel only when the user asks for that specific action in this conversation.
+- Trades always follow this sequence: `ig_get_market`, then an `ig_preview_*` tool, then paste the preview `summary` to the user verbatim, then wait for an explicit "yes". Only then call `ig_execute_trade`. Treat anything ambiguous ("sounds good", "maybe") as no.
+- One confirmation token per approved trade. Never reuse a token, batch several trades behind one approval, or retry a failed or `UNKNOWN` execution. Check `ig_get_positions` / `ig_get_deal_confirmation` first.
+- If a safety check rejects an order (size cap, stop-loss requirement, allowlist), tell the user. Never work around it, for example by splitting an order into several smaller ones.
+- Do not ask for, print, store, or write IG credentials, session tokens or confirmation tokens into files, code, commits or logs.
+- Present data and analysis, not personalised investment advice. Mention that leveraged products can lose more than the stake when relevant.

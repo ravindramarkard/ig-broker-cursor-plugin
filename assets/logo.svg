@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">IG Broker plugin</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1F3A"/>
+      <stop offset="1" stop-color="#132E57"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1F4C8F"/>
+      <stop offset="1" stop-color="#163A6E"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+  <path d="M64 18 L100 31 V60 C100 83 85 101 64 110 C43 101 28 83 28 60 V31 Z" fill="url(#shield)" stroke="#3E7BD6" stroke-width="3" stroke-linejoin="round"/>
+  <g stroke-linecap="round">
+    <line x1="48" y1="50" x2="48" y2="86" stroke="#F0525F" stroke-width="3"/>
+    <rect x="42" y="58" width="12" height="18" rx="2" fill="#F0525F"/>
+    <line x1="64" y1="40" x2="64" y2="80" stroke="#2FD69B" stroke-width="3"/>
+    <rect x="58" y="48" width="12" height="22" rx="2" fill="#2FD69B"/>
+    <line x1="80" y1="34" x2="80" y2="70" stroke="#2FD69B" stroke-width="3"/>
+    <rect x="74" y="40" width="12" height="20" rx="2" fill="#2FD69B"/>
+  </g>
+  <path d="M40 92 L56 80 L68 86 L88 66" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+</svg>
