@@ -1,0 +1,73 @@
+{
+  "name": "ig-broker",
+  "displayName": "IG Broker",
+  "version": "0.1.0",
+  "description": "Let Cursor agents securely work with your IG trading account: portfolio and P&L review, market research and historical prices, and guarded order execution (preview, human approval, single-use confirmation) via the IG REST API. Read-only by default.",
+  "author": {
+    "name": "markardravindra"
+  },
+  "license": "MIT",
+  "keywords": ["ig", "ig-markets", "trading", "brokerage", "spread-betting", "cfd", "finance", "portfolio", "mcp"],
+  "category": "finance",
+  "tags": ["trading", "finance", "mcp"],
+  "logo": "assets/logo.svg",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "IG_API_KEY": {
+        "type": "string",
+        "title": "IG API key",
+        "description": "Create one in My IG > Settings > API keys. Demo and live accounts have separate keys.",
+        "minLength": 10
+      },
+      "IG_IDENTIFIER": {
+        "type": "string",
+        "title": "IG username",
+        "description": "The username you use to log in to IG (not your email address)."
+      },
+      "IG_PASSWORD": {
+        "type": "string",
+        "title": "IG password",
+        "description": "Your IG password. It is only sent to IG's API over HTTPS and is never returned to the agent."
+      },
+      "IG_ENVIRONMENT": {
+        "type": "string",
+        "title": "Environment",
+        "description": "demo (recommended to start), live, or mock (simulated data, no credentials needed).",
+        "enum": ["demo", "live", "mock"],
+        "default": "demo"
+      },
+      "IG_ACCOUNT_ID": {
+        "type": "string",
+        "title": "Account ID (optional)",
+        "description": "Which account to use when your login has several (e.g. spread bet and CFD). Defaults to your preferred account."
+      },
+      "IG_TRADING_ENABLED": {
+        "type": "string",
+        "title": "Allow trading",
+        "description": "false = read-only tools only. true = expose trade preview/execute tools (every execution still requires your approval).",
+        "enum": ["false", "true"],
+        "default": "false"
+      },
+      "IG_MAX_DEAL_SIZE": {
+        "type": "string",
+        "title": "Maximum deal size",
+        "description": "Hard cap on the size of any single order the agent can place (stake per point or contracts).",
+        "default": "1"
+      },
+      "IG_REQUIRE_STOP_LOSS": {
+        "type": "string",
+        "title": "Require stop loss",
+        "description": "When true, new positions and working orders must include a stop loss, and stops cannot be removed.",
+        "enum": ["true", "false"],
+        "default": "true"
+      },
+      "IG_ALLOWED_EPICS": {
+        "type": "string",
+        "title": "Allowed markets (optional)",
+        "description": "Comma-separated list of epics the agent may open trades on, e.g. IX.D.FTSE.DAILY.IP,CS.D.EURUSD.TODAY.IP. Empty = any market."
+      }
+    },
+    "required": ["IG_API_KEY", "IG_IDENTIFIER", "IG_PASSWORD"]
+  }
+}

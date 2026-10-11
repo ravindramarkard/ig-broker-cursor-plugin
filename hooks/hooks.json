@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeMCPExecution": [
+      {
+        "command": "node ./hooks/ig-trade-approval.mjs",
+        "matcher": "ig_execute_trade",
+        "timeout": 10,
+        "failClosed": true
+      }
+    ]
+  }
+}

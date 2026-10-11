@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "ig-broker": {
+      "command": "node",
+      "args": ["${CURSOR_PLUGIN_ROOT}/dist/ig-broker-mcp.mjs"],
+      "env": {
+        "IG_API_KEY": "${IG_API_KEY}",
+        "IG_IDENTIFIER": "${IG_IDENTIFIER}",
+        "IG_PASSWORD": "${IG_PASSWORD}",
+        "IG_ENVIRONMENT": "${IG_ENVIRONMENT}",
+        "IG_ACCOUNT_ID": "${IG_ACCOUNT_ID}",
+        "IG_TRADING_ENABLED": "${IG_TRADING_ENABLED}",
+        "IG_MAX_DEAL_SIZE": "${IG_MAX_DEAL_SIZE}",
+        "IG_REQUIRE_STOP_LOSS": "${IG_REQUIRE_STOP_LOSS}",
+        "IG_ALLOWED_EPICS": "${IG_ALLOWED_EPICS}"
+      }
+    }
+  }
+}
