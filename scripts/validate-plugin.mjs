@@ -95,7 +95,9 @@ if (mcp && manifest) {
   const used = [...JSON.stringify(mcp).matchAll(/\$\{([A-Za-z0-9_:.-]+)\}/g)].map((m) => m[1]);
   for (const v of used) {
     if (v === "CURSOR_PLUGIN_ROOT" || v === "CLAUDE_PLUGIN_ROOT") continue;
-    if (!declared.has(v)) err(`mcp.json: \${${v}} is not declared in plugin.json variables`);
+    // ${env:NAME} is the desktop plugin settings field. NAME must still be declared.
+    const name = v.startsWith("env:") ? v.slice(4) : v;
+    if (!declared.has(name)) err(`mcp.json: \${${v}} is not declared in plugin.json variables`);
   }
   for (const [name, server] of Object.entries(mcp.mcpServers ?? {})) {
     for (const arg of server.args ?? []) {

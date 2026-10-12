@@ -10,3 +10,4 @@ Initial release.
 - `beforeMCPExecution` hook that requires human approval of every trade in Cursor and shows the server-generated order summary.
 - Skills (portfolio review, market research, trade execution, trading journal), a read-only risk-analyst subagent, `/ig-portfolio`, `/ig-quote` and `/ig-trade` commands, and an always-on safety rule.
 - Mock mode (`IG_ENVIRONMENT=mock`) with a simulated IG API for trying the plugin without an account.
+- Plugin settings are entered in Cursor's plugin settings screen (`${env:NAME}` fields). Customize → IG Broker.

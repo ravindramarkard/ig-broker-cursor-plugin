@@ -41,7 +41,7 @@ A Cursor Marketplace plugin that lets Cursor's AI agents work with your **IG** t
 
 ## Configuration
 
-Set these in Cursor under **Plugins → IG Broker → Configure**:
+Set these in the plugin settings screen. Open **Customize** in the sidebar, select **IG Broker**, and edit the plugin. Cursor shows a field for each value below.
 
 | Variable | Default | Description |
 |---|---|---|
@@ -54,8 +54,6 @@ Set these in Cursor under **Plugins → IG Broker → Configure**:
 | `IG_MAX_DEAL_SIZE` | `1` | Max size per order (stake per point or contracts) |
 | `IG_REQUIRE_STOP_LOSS` | `true` | Require stops on new positions and orders |
 | `IG_ALLOWED_EPICS` | any | Comma-separated epic allowlist |
-
-**Local fallback:** if plugin variables aren't available (e.g. while developing locally), the server also reads `~/.cursor/ig-broker/config.env`. Copy [`config.env.example`](config.env.example) there and run `chmod 600` on it. Plugin variables take precedence over the file.
 
 Start on **demo**. Get a demo account and API key from [IG](https://www.ig.com/uk/demo-account), and switch to `live` once you're comfortable.
 
@@ -93,7 +91,7 @@ npm run check        # typecheck + unit tests + build + plugin validation + stdi
 npm run build && npm run inspect
 ```
 
-This opens the bundled server in the official [MCP Inspector](https://github.com/modelcontextprotocol/inspector), launched exactly as `mcp.json` does. It defaults to mock mode with trading enabled. Open the printed URL, click **Connect**, then use **Tools → List Tools**. To try a trade, run `ig_preview_open_position` (e.g. epic `IX.D.FTSE.DAILY.IP`, `BUY`, size `1`, stopDistance `25`). Then run `ig_execute_trade` with the returned `confirmationToken`, and `ig_get_positions` to see the fill. Use `IG_ENVIRONMENT=demo npm run inspect` to hit your IG demo account with the credentials in `~/.cursor/ig-broker/config.env`.
+This opens the bundled server in the official [MCP Inspector](https://github.com/modelcontextprotocol/inspector), launched exactly as `mcp.json` does. It defaults to mock mode with trading enabled. Open the printed URL, click **Connect**, then use **Tools → List Tools**. To try a trade, run `ig_preview_open_position` (e.g. epic `IX.D.FTSE.DAILY.IP`, `BUY`, size `1`, stopDistance `25`). Then run `ig_execute_trade` with the returned `confirmationToken`, and `ig_get_positions` to see the fill. Use `IG_ENVIRONMENT=demo IG_API_KEY=... IG_IDENTIFIER=... IG_PASSWORD=... npm run inspect` to hit a demo account from the shell. In Cursor, those values belong in the plugin settings screen.
 
 `npm run inspect` extends confirmation tokens to 10 minutes (`IG_CONFIRMATION_TTL_SECONDS=600`) so there's time to copy them by hand. The plugin default is 2 minutes. Each **Connect** click starts a fresh server process, so a token only works in the connection that issued it.
 
@@ -109,7 +107,7 @@ npm run hook:simulate            # or: npm run hook:simulate -- <confirmationTok
 npm run build && npm run install-local
 ```
 
-Then run **Developer: Reload Window** in Cursor and open **Customize** to confirm the MCP server, skills, rules, commands, subagent and hook loaded. To try it without an IG account, put `IG_ENVIRONMENT=mock` (and optionally `IG_TRADING_ENABLED=true`) in `~/.cursor/ig-broker/config.env`. Mock mode serves realistic simulated markets, positions and fills, and every response is labelled `SIMULATED`.
+Then run **Developer: Reload Window** in Cursor and open **Customize**. Select **IG Broker** and edit the plugin settings. Set **Environment** to `mock` to try it without an IG account (optionally set **Allow trading** to `true`). Mock mode serves realistic simulated markets, positions and fills, and every response is labelled `SIMULATED`.
 
 ### Project layout
 

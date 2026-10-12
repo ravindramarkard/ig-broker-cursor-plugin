@@ -45,8 +45,8 @@ const KNOWN_KEYS = [
 type Env = Record<string, string | undefined>;
 
 /**
- * Cursor substitutes `${VAR}` placeholders from plugin variables. When a variable
- * has no value the literal placeholder can reach us, so treat it as unset.
+ * Cursor fills `${env:NAME}` from the plugin settings screen. When a field is
+ * empty the literal placeholder can reach us, so treat it as unset.
  */
 export function clean(value: string | undefined): string | undefined {
   if (value === undefined) return undefined;
@@ -102,7 +102,7 @@ export function loadConfig(env: Env = process.env): IgConfig {
   const configFile = clean(env.IG_CONFIG_FILE) ?? DEFAULT_CONFIG_FILE;
   const fileEnv = loadConfigFile(configFile, warnings);
 
-  // Values supplied by Cursor (plugin variables) win over the local config file.
+  // Values from the plugin settings screen win over a local developer config file.
   const get = (key: (typeof KNOWN_KEYS)[number]) => clean(env[key]) ?? clean(fileEnv[key]);
 
   const envName = (get("IG_ENVIRONMENT") ?? "demo").toLowerCase();

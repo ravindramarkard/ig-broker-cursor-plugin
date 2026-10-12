@@ -59,8 +59,8 @@ export class IgClient {
     if (this.config.missingCredentials.length > 0) {
       throw new ConfigError(
         `IG credentials are not configured (missing ${this.config.missingCredentials.join(", ")}). ` +
-          "Set them in Cursor under Plugins > IG Broker > Configure, or in ~/.cursor/ig-broker/config.env. " +
-          "Set IG_ENVIRONMENT=mock to try the plugin with simulated data.",
+          "Open Customize in the sidebar, select IG Broker, and edit the plugin settings. " +
+          "Enter the API key, username, and password, and set Environment to demo, live, or mock.",
       );
     }
   }

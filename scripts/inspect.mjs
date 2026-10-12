@@ -3,8 +3,7 @@
 // launched the same way Cursor launches it from mcp.json.
 //
 // Defaults to mock mode with trading enabled so every tool can be exercised without an
-// IG account. Override with env vars, e.g. `IG_ENVIRONMENT=demo npm run inspect`
-// (credentials then come from ~/.cursor/ig-broker/config.env).
+// IG account. Override with env vars, e.g. `IG_ENVIRONMENT=demo npm run inspect`.
 import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import { existsSync } from "node:fs";

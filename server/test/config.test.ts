@@ -9,6 +9,8 @@ const NO_FILE = { IG_CONFIG_FILE: "/nonexistent/config.env" };
 describe("config", () => {
   it("treats unresolved ${VAR} placeholders as unset", () => {
     expect(clean("${IG_ACCOUNT_ID}")).toBeUndefined();
+    expect(clean("${env:IG_API_KEY}")).toBeUndefined();
+    expect(clean("${user_config.IG_ENVIRONMENT}")).toBeUndefined();
     expect(clean("  ")).toBeUndefined();
     expect(clean(" ABC ")).toBe("ABC");
   });

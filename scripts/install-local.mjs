@@ -22,4 +22,4 @@ for (const item of include) {
 
 console.log(`Installed IG Broker plugin to ${target}`);
 console.log("Next: in Cursor run 'Developer: Reload Window', then open Customize to check the plugin's MCP server, skills, rules and hooks.");
-console.log("Credentials: configure the plugin variables in Cursor, or create ~/.cursor/ig-broker/config.env (chmod 600). See README.");
+console.log("Settings: open Customize, select IG Broker, and edit the plugin. Cursor shows a field for each value.");
