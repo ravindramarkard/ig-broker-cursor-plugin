@@ -14,7 +14,7 @@ await build({
   platform: "node",
   target: "node20",
   format: "esm",
-  minify: true,
+  minify: false,
   sourcemap: false,
   legalComments: "eof",
   banner: {
