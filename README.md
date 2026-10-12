@@ -129,9 +129,12 @@ scripts/                     build, validate, smoke, install-local
 
 ### Publishing
 
-1. Push this repo to a **public** Git repository and make sure `npm run check` passes.
-2. Submit the repository URL at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish).
-3. Bump `version` in both `package.json` and `.cursor-plugin/plugin.json`, then rebuild `dist/` for each release. Marketplace updates are reviewed manually.
+1. Push this repo to a **public** Git repository (Cursor requires marketplace plugins to be open source). Make sure `npm run check` passes and CI is green.
+2. Add `"repository"` and `"homepage"` (the public repo URL) to `.cursor-plugin/plugin.json`.
+3. Sign in and submit the repository URL at [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish). Cursor reviews every plugin manually before listing it.
+4. For each release, bump `version` in `package.json` and `.cursor-plugin/plugin.json`, add a [CHANGELOG](CHANGELOG.md) entry, rebuild `dist/`, push, and resubmit. Updates are also reviewed manually and are not pulled automatically.
+
+The bundle in `dist/` is unminified and reproducible (`npm ci && npm run build` produces a byte-identical file), so reviewers can check it against `server/src`. See [SECURITY.md](SECURITY.md) for the vulnerability reporting policy.
 
 ### Known limitations
 
