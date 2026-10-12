@@ -25,6 +25,8 @@ const serverEnv = {
   IG_ENVIRONMENT: process.env.IG_ENVIRONMENT || "mock",
   IG_TRADING_ENABLED: process.env.IG_TRADING_ENABLED || "true",
   IG_MAX_DEAL_SIZE: process.env.IG_MAX_DEAL_SIZE || "2",
+  // Clicking through by hand is slower than an agent, so give previews 10 minutes here.
+  IG_CONFIRMATION_TTL_SECONDS: process.env.IG_CONFIRMATION_TTL_SECONDS || "600",
 };
 for (const key of ["IG_ACCOUNT_ID", "IG_REQUIRE_STOP_LOSS", "IG_ALLOWED_EPICS", "IG_CONFIG_FILE", "IG_STATE_DIR"]) {
   if (process.env[key]) serverEnv[key] = process.env[key];

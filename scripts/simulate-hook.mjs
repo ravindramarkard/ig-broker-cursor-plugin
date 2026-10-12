@@ -22,7 +22,7 @@ if (!token) {
         .sort((a, b) => b.t - a.t)
     : [];
   if (!files.length) {
-    console.error(`No pending previews in ${pendingDir}. Run an ig_preview_* tool first (tokens expire after 2 minutes).`);
+    console.error(`No pending previews in ${pendingDir}. Run an ig_preview_* tool first (tokens are short-lived).`);
     process.exit(1);
   }
   token = files[0].f.replace(/\.json$/, "");

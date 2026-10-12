@@ -359,7 +359,7 @@ export function createServer(deps: ServerDeps): McpServer {
     {
       title: "Preview: open position",
       description:
-        "Validate a new MARKET order against IG dealing rules and the plugin's safety limits, and return a human-readable summary plus a single-use confirmationToken (valid 2 minutes). Sends nothing to IG.",
+        "Validate a new MARKET order against IG dealing rules and the plugin's safety limits, and return a human-readable summary plus a single-use, short-lived confirmationToken. Sends nothing to IG.",
       inputSchema: {
         epic,
         direction,
@@ -554,7 +554,7 @@ export function createServer(deps: ServerDeps): McpServer {
     {
       title: "Execute previewed trade",
       description:
-        "Send a previously previewed trade to IG. ONLY call this after the user has explicitly approved the exact preview summary in this conversation. The token is single-use and expires 2 minutes after the preview.",
+        `Send a previously previewed trade to IG. ONLY call this after the user has explicitly approved the exact preview summary in this conversation. The token is single-use and expires ${Math.round(config.confirmationTtlMs / 1000)} seconds after the preview.`,
       inputSchema: { confirmationToken: z.string().regex(/^igc_[a-f0-9]{32}$/, "Use the confirmationToken returned by a preview tool") },
       annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: false, openWorldHint: true },
     },

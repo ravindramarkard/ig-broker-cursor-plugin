@@ -87,6 +87,22 @@ npm run check        # typecheck + unit tests + build + plugin validation + stdi
 | `npm run dev` | Run the server from source in mock mode |
 | `npm run install-local` | Copy the plugin into `~/.cursor/plugins/local/ig-broker` for testing in Cursor |
 
+### Try the tools in your browser (MCP Inspector)
+
+```bash
+npm run build && npm run inspect
+```
+
+This opens the bundled server in the official [MCP Inspector](https://github.com/modelcontextprotocol/inspector), launched exactly as `mcp.json` does. It defaults to mock mode with trading enabled. Open the printed URL, click **Connect**, then use **Tools → List Tools**. To try a trade, run `ig_preview_open_position` (e.g. epic `IX.D.FTSE.DAILY.IP`, `BUY`, size `1`, stopDistance `25`). Then run `ig_execute_trade` with the returned `confirmationToken`, and `ig_get_positions` to see the fill. Use `IG_ENVIRONMENT=demo npm run inspect` to hit your IG demo account with the credentials in `~/.cursor/ig-broker/config.env`.
+
+`npm run inspect` extends confirmation tokens to 10 minutes (`IG_CONFIRMATION_TTL_SECONDS=600`) so there's time to copy them by hand. The plugin default is 2 minutes. Each **Connect** click starts a fresh server process, so a token only works in the connection that issued it.
+
+The Inspector doesn't run Cursor hooks. To see the approval prompt Cursor would show, run this while a preview is still valid:
+
+```bash
+npm run hook:simulate            # or: npm run hook:simulate -- <confirmationToken>
+```
+
 ### Try it in Cursor locally
 
 ```bash

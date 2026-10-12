@@ -15,6 +15,7 @@ export interface IgConfig {
   maxDealSize: number;
   allowedEpics: string[] | null;
   requireStopLoss: boolean;
+  confirmationTtlMs: number;
   missingCredentials: string[];
   configFile?: string;
   warnings: string[];
@@ -38,6 +39,7 @@ const KNOWN_KEYS = [
   "IG_MAX_DEAL_SIZE",
   "IG_ALLOWED_EPICS",
   "IG_REQUIRE_STOP_LOSS",
+  "IG_CONFIRMATION_TTL_SECONDS",
 ] as const;
 
 type Env = Record<string, string | undefined>;
@@ -129,6 +131,13 @@ export function loadConfig(env: Env = process.env): IgConfig {
     maxDealSize = 1;
   }
 
+  const ttlRaw = get("IG_CONFIRMATION_TTL_SECONDS");
+  let ttlSeconds = ttlRaw === undefined ? 120 : Number(ttlRaw);
+  if (!Number.isFinite(ttlSeconds) || ttlSeconds < 30 || ttlSeconds > 600) {
+    warnings.push(`IG_CONFIRMATION_TTL_SECONDS must be between 30 and 600, using 120.`);
+    ttlSeconds = 120;
+  }
+
   const allowedRaw = get("IG_ALLOWED_EPICS");
   const allowedEpics = allowedRaw
     ? allowedRaw
@@ -148,6 +157,7 @@ export function loadConfig(env: Env = process.env): IgConfig {
     maxDealSize,
     allowedEpics: allowedEpics && allowedEpics.length > 0 ? allowedEpics : null,
     requireStopLoss: parseBool(get("IG_REQUIRE_STOP_LOSS"), true),
+    confirmationTtlMs: ttlSeconds * 1000,
     missingCredentials,
     configFile: existsSync(configFile) ? configFile : undefined,
     warnings,

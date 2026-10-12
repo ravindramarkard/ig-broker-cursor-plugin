@@ -47,9 +47,16 @@ describe("config", () => {
   });
 
   it("rejects nonsense numeric limits", () => {
-    const c = loadConfig({ ...NO_FILE, IG_MAX_DEAL_SIZE: "-4" });
+    const c = loadConfig({ ...NO_FILE, IG_MAX_DEAL_SIZE: "-4", IG_CONFIRMATION_TTL_SECONDS: "86400" });
     expect(c.maxDealSize).toBe(1);
+    expect(c.confirmationTtlMs).toBe(120_000);
     expect(c.warnings.join()).toMatch(/IG_MAX_DEAL_SIZE/);
+    expect(c.warnings.join()).toMatch(/IG_CONFIRMATION_TTL_SECONDS/);
+  });
+
+  it("accepts a bounded confirmation TTL", () => {
+    expect(loadConfig({ ...NO_FILE }).confirmationTtlMs).toBe(120_000);
+    expect(loadConfig({ ...NO_FILE, IG_CONFIRMATION_TTL_SECONDS: "600" }).confirmationTtlMs).toBe(600_000);
   });
 
   it("parses env files", () => {

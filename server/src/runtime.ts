@@ -28,7 +28,7 @@ export function createRuntime(input: IgConfig, opts: RuntimeOptions = {}) {
   const redactor = new Redactor(secretsOf(config));
   const mock = config.environment === "mock" && !opts.fetch ? new MockIgApi() : null;
   const client = new IgClient(config, redactor, opts.fetch ?? mock?.fetch ?? fetch, opts.sleep);
-  const confirmations = new ConfirmationStore(stateDir ? join(stateDir, "pending") : null);
+  const confirmations = new ConfirmationStore(stateDir ? join(stateDir, "pending") : null, Date.now, config.confirmationTtlMs);
   const audit = new AuditLog(stateDir ? join(stateDir, "audit.jsonl") : null, redactor);
   const server = createServer({ config, client, redactor, confirmations, audit });
   return { config, client, server, confirmations, redactor, stateDir };

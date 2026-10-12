@@ -58,9 +58,14 @@ export class ConfirmationStore {
     const trade = this.pending.get(token);
     this.pending.delete(token);
     this.unmirror(token);
-    if (!trade) return { error: "Unknown or already-used confirmation token. Run a preview tool again." };
+    if (!trade) {
+      return {
+        error:
+          "Unknown, expired, or already-used confirmation token (tokens are single-use and only valid in the server session that issued them). Run a preview tool again.",
+      };
+    }
     if (this.now() > trade.expiresAt) {
-      return { error: "Confirmation token expired (tokens are valid for 2 minutes). Preview the trade again." };
+      return { error: `Confirmation token expired (tokens are valid for ${Math.round(this.ttlMs / 1000)} seconds). Preview the trade again.` };
     }
     return trade;
   }
