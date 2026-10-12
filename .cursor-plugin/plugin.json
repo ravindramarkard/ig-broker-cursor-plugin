@@ -7,6 +7,8 @@
     "name": "markardravindra"
   },
   "license": "MIT",
+  "homepage": "https://github.com/ravindramarkard/ig-broker-cursor-plugin",
+  "repository": "https://github.com/ravindramarkard/ig-broker-cursor-plugin",
   "keywords": ["ig", "ig-markets", "trading", "brokerage", "spread-betting", "cfd", "finance", "portfolio", "mcp"],
   "category": "finance",
   "tags": ["trading", "finance", "mcp"],
